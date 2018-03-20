@@ -1,3 +1,7 @@
+Overview
+- This project connects to the reddit Top endpoint. To view comments for a post one can tap on the cell for a given post
+- Some thumbnails will be displayed as colored squares (i.e. NSFW posts). Basically whenever we don't get a valid image URL in the response we map the string we get back to a different color.
+
 Project setup / install
 - This project requires use of CocoaPods. To set up the dependencies needed for this project run `$ pod install`
 
@@ -5,7 +9,7 @@ Usage of 3rd Party Libraries
 - I used Haneke to assist in downloading and caching images
 
 Outstanding Issues
-- Due to the way comments are presented I wasn't able to implement paging on the comments page (mostly due to time constraints). Right now comments are displayed sequentially and don't show the tree structure displayed on the website. One possible way to do this would be by using a tableView with each section corresponding to an indent level in the comments. This would require pretty heavy use of batch updating to ensure that there is good performance.
+- Due to the way comments are presented / time constraints I wasn't able to implement paging on the comments page. Right now comments are displayed sequentially and don't show the tree structure displayed on the website. One possible way to do this would be by using a tableView with each section corresponding to an indent level in the comments. This would require pretty heavy use of batch updating to ensure that there is good performance.
 - I am only displaying the raw text in the comments. I know it is possible to render HTML into an NSAttributedString but as a first pass I think displaying the plain text is adequate.
 
 Architecture:
