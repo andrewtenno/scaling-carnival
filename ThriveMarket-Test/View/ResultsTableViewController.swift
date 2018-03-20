@@ -14,6 +14,7 @@ class ResultsTableViewController: UITableViewController {
     var viewModelGenerator: ViewModelGeneratable?
     var viewModels: [PostViewModel] = []
     var nextPageToFetch: String?
+    var isLoadingNextPage = true
 
     private let reuseIdentifier = "reuseIdentifier"
 
@@ -42,12 +43,14 @@ private extension ResultsTableViewController {
         switch result {
         case .success(let viewModels, let nextPageToFetch):
             OperationQueue.main.addOperation {
-                self.viewModels = viewModels
+                self.isLoadingNextPage = false
+                self.viewModels += viewModels
                 self.nextPageToFetch = nextPageToFetch
                 self.tableView.reloadData()
             }
         case .failure(let error):
             OperationQueue.main.addOperation {
+                self.isLoadingNextPage = false
                 self.presentError(error)
             }
         }
@@ -85,5 +88,26 @@ extension ResultsTableViewController {
 extension ResultsTableViewController {
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return UITableViewAutomaticDimension
+    }
+}
+
+// MARK: UIScrollViewDelegate
+
+extension ResultsTableViewController {
+    override func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        let currentOffset = scrollView.contentOffset.y
+        let maximumOffset = scrollView.contentSize.height - scrollView.frame.size.height
+
+        // Change 10.0 to adjust the distance from bottom
+        if maximumOffset - currentOffset <= 10.0 {
+            loadNextPage()
+        }
+    }
+
+    private func loadNextPage() {
+        guard isLoadingNextPage == false else { return }
+
+        isLoadingNextPage = true
+        fetchViewModels()
     }
 }
