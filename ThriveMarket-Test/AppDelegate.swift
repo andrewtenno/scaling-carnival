@@ -37,7 +37,7 @@ private func createWindow() -> UIWindow {
 
 private func createViewModelGenerator() -> ListingViewModelGeneratable {
     let dataFetcher = RemoteDataFetcher(urlSession: .shared)
-    let url = URL(string: "http://www.reddit.com/r/all/new.json")!
+    let url = URL(string: "http://www.reddit.com/r/all/top.json")!
     let resultsFetcher = ResultsFetcher(endpoint: url, dataFetcher: dataFetcher)
     let viewModelGenerator = ViewModelGenerator(resultsFetcher: resultsFetcher)
 

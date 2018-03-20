@@ -16,19 +16,18 @@ class ResultsTableViewController: UITableViewController {
     private var nextPageToFetch: String?
     private var isLoadingNextPage = true
 
-    private let reuseIdentifier = "reuseIdentifier"
-
-    override var navigationItem: UINavigationItem {
-        return UINavigationItem(title: "/r/new")
-    }
+    private let reuseIdentifier = "ResultsTableViewCell"
 
     override func viewDidLoad() {
+        self.navigationItem.title = "/r/top"
         tableView.estimatedRowHeight = kEstimatedCellHeight
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.register(ResultsTableViewCell.self, forCellReuseIdentifier: reuseIdentifier)
     }
 
     override func viewDidAppear(_ animated: Bool) {
+        guard viewModels.isEmpty else { return }
+        
         fetchViewModels()
     }
 }
@@ -36,11 +35,11 @@ class ResultsTableViewController: UITableViewController {
 private extension ResultsTableViewController {
     func fetchViewModels() {
         viewModelGenerator?.fetchPostViewModels(afterPage: nextPageToFetch, completion: { [weak self] (result) in
-            self?.handleViewModalGenerationResult(result)
+            self?.handleViewModelGenerationResult(result)
         })
     }
 
-    private func handleViewModalGenerationResult(_ result: ListingViewModelGenerationResult<PostViewModel>) {
+    private func handleViewModelGenerationResult(_ result: ListingViewModelGenerationResult<PostViewModel>) {
         switch result {
         case .success(let viewModels, let nextPageToFetch):
             OperationQueue.main.addOperation {

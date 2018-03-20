@@ -9,7 +9,7 @@
 import Foundation
 
 enum ListingViewModelGenerationResult<T> {
-    case success([T], String)
+    case success([T], String?)
     case failure(Error)
 }
 
@@ -52,7 +52,7 @@ private func handleFetchPosts(result: ListingFetchResult<Post>, completion: (Lis
     }
 }
 
-private func createPostViewModels(fromListing listing: Listing<Post>) -> ([PostViewModel], String) {
+private func createPostViewModels(fromListing listing: Listing<Post>) -> ([PostViewModel], String?) {
     return (listing.page.children.map({ (child) -> PostViewModel in
         let post = child.data
 
@@ -95,11 +95,12 @@ private func handleFetchComments(result: ListingFetchResult<Comment>, completion
     }
 }
 
-private func createCommentViewModels(fromListing listing: Listing<Comment>) -> ([CommentViewModel], String) {
-    return (listing.page.children.map({ (child) -> CommentViewModel in
+private func createCommentViewModels(fromListing listing: Listing<Comment>) -> ([CommentViewModel], String?) {
+    return (listing.page.children.flatMap({ (child) -> CommentViewModel? in
         let comment = child.data
+        guard let author = comment.author, let body = comment.body else { return nil }
 
-        return CommentViewModel(user: comment.author,
-                                text: comment.body)
+        return CommentViewModel(user: author,
+                                text: body)
     }), listing.page.after)
 }

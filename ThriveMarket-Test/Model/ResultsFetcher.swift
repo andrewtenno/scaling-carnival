@@ -124,8 +124,9 @@ private extension ResultsFetcher {
         switch result {
         case .success(let data):
             do {
-                let comment = try jsonDecoder.decode(Listing<Comment>.self, from: data)
-                completion(.success(comment))
+                let listing = try jsonDecoder.decode(Array<Listing<Comment>>.self, from: data)
+
+                listing.forEach({ completion(.success($0)) })
             } catch {
                 completion(.failure(error))
             }

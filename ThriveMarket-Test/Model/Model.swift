@@ -18,7 +18,7 @@ struct Listing<T>: Decodable where T: Decodable {
 
 struct Page<T>: Decodable where T: Decodable {
     let before: String?
-    let after: String
+    let after: String?
     let children: [Child<T>]
 }
 
@@ -35,6 +35,6 @@ struct Post: Decodable {
 }
 
 struct Comment: Decodable {
-    let body: String
-    let author: String
+    let body: String?
+    let author: String?
 }

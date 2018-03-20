@@ -58,7 +58,7 @@ private extension CommentsTableViewCell {
         userLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             userLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: kPaddingConstant),
-            userLabel.leadingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: kPaddingConstant),
+            userLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: kPaddingConstant),
             userLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -kPaddingConstant),
             ])
     }
@@ -69,7 +69,7 @@ private extension CommentsTableViewCell {
         commentLabel.setContentHuggingPriority(.defaultLow, for: .vertical)
         NSLayoutConstraint.activate([
             commentLabel.topAnchor.constraint(equalTo: userLabel.bottomAnchor, constant: kPaddingConstant),
-            commentLabel.leadingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: kPaddingConstant),
+            commentLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: kPaddingConstant),
             commentLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -kPaddingConstant),
             commentLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -kPaddingConstant)
             ])

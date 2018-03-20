@@ -17,13 +17,10 @@ class CommentsTableViewController: UITableViewController {
     private var nextPageToFetch: String?
     private var isLoadingNextPage = true
 
-    private let reuseIdentifier = "reuseIdentifier"
-
-    override var navigationItem: UINavigationItem {
-        return UINavigationItem(title: "Comments")
-    }
+    private let reuseIdentifier = "CommentsTableViewCell"
 
     override func viewDidLoad() {
+        self.navigationItem.title = "Comments"
         tableView.estimatedRowHeight = kEstimatedCellHeight
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.register(CommentsTableViewCell.self, forCellReuseIdentifier: reuseIdentifier)
@@ -38,11 +35,11 @@ private extension CommentsTableViewController {
     func fetchViewModels() {
         guard let url = url else { return }
         viewModelGenerator?.fetchCommentViewModels(forURL: url, afterPage: nextPageToFetch, completion: { [weak self] (result) in
-            self?.handleViewModalGenerationResult(result)
+            self?.handleViewModelGenerationResult(result)
         })
     }
 
-    private func handleViewModalGenerationResult(_ result: ListingViewModelGenerationResult<CommentViewModel>) {
+    private func handleViewModelGenerationResult(_ result: ListingViewModelGenerationResult<CommentViewModel>) {
         switch result {
         case .success(let viewModels, let nextPageToFetch):
             OperationQueue.main.addOperation {
@@ -91,26 +88,5 @@ extension CommentsTableViewController {
 extension CommentsTableViewController {
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return UITableViewAutomaticDimension
-    }
-}
-
-// MARK: UIScrollViewDelegate
-
-extension CommentsTableViewController {
-    override func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
-        let currentOffset = scrollView.contentOffset.y
-        let maximumOffset = scrollView.contentSize.height - scrollView.frame.size.height
-
-        // Change 10.0 to adjust the distance from bottom
-        if maximumOffset - currentOffset <= 10.0 {
-            loadNextPage()
-        }
-    }
-
-    private func loadNextPage() {
-        guard isLoadingNextPage == false else { return }
-
-        isLoadingNextPage = true
-        fetchViewModels()
     }
 }
