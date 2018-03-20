@@ -13,10 +13,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+
+        window = createWindow()
+        window?.makeKeyAndVisible()
+
         return true
     }
+}
+
+// MARK: Helpers
+
+private func createWindow() -> UIWindow {
+    let screenFrame = UIScreen.main.fixedCoordinateSpace.bounds
+    let window = UIWindow(frame: screenFrame)
+    let resultsViewController = ResultsTableViewController()
+    let navigationController = UINavigationController(rootViewController: resultsViewController)
+    window.rootViewController = navigationController
+
+    return window
 }
 
