@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		399D4C60206109AE00EE1F8D /* CommentsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 399D4C5F206109AE00EE1F8D /* CommentsTableViewController.swift */; };
+		399D4C62206116C900EE1F8D /* CommentsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 399D4C61206116C900EE1F8D /* CommentsTableViewCell.swift */; };
 		39F2C8F52060B86E00B1B10D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F2C8F42060B86E00B1B10D /* AppDelegate.swift */; };
 		39F2C8F72060B86E00B1B10D /* ResultsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F2C8F62060B86E00B1B10D /* ResultsTableViewController.swift */; };
 		39F2C8FC2060B86E00B1B10D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 39F2C8FB2060B86E00B1B10D /* Assets.xcassets */; };
@@ -45,6 +46,7 @@
 		2992E39BA9839507EBF3B0F9 /* Pods-ThriveMarket-Test.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ThriveMarket-Test.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ThriveMarket-Test/Pods-ThriveMarket-Test.debug.xcconfig"; sourceTree = "<group>"; };
 		2D3A3BA680BCEE34FE9CABAD /* Pods-ThriveMarket-Test.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ThriveMarket-Test.release.xcconfig"; path = "Pods/Target Support Files/Pods-ThriveMarket-Test/Pods-ThriveMarket-Test.release.xcconfig"; sourceTree = "<group>"; };
 		399D4C5F206109AE00EE1F8D /* CommentsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentsTableViewController.swift; sourceTree = "<group>"; };
+		399D4C61206116C900EE1F8D /* CommentsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentsTableViewCell.swift; sourceTree = "<group>"; };
 		39F2C8F12060B86E00B1B10D /* ThriveMarket-Test.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ThriveMarket-Test.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		39F2C8F42060B86E00B1B10D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		39F2C8F62060B86E00B1B10D /* ResultsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultsTableViewController.swift; sourceTree = "<group>"; };
@@ -163,6 +165,7 @@
 				39F2C8F62060B86E00B1B10D /* ResultsTableViewController.swift */,
 				39F2C9332060D59900B1B10D /* ResultsTableViewCell.swift */,
 				399D4C5F206109AE00EE1F8D /* CommentsTableViewController.swift */,
+				399D4C61206116C900EE1F8D /* CommentsTableViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -392,6 +395,7 @@
 				39F2C92B2060BE8D00B1B10D /* ResultsFetcher.swift in Sources */,
 				39F2C8F52060B86E00B1B10D /* AppDelegate.swift in Sources */,
 				39F2C9302060CFA000B1B10D /* ViewModel.swift in Sources */,
+				399D4C62206116C900EE1F8D /* CommentsTableViewCell.swift in Sources */,
 				39F2C9292060BE7700B1B10D /* Model.swift in Sources */,
 				399D4C60206109AE00EE1F8D /* CommentsTableViewController.swift in Sources */,
 			);

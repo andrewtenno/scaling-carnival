@@ -93,8 +93,9 @@ extension ResultsTableViewController {
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let viewModel = viewModels[indexPath.row]
-        let url = viewModel.commentsURL
         let commentsViewController = CommentsTableViewController()
+        commentsViewController.url = viewModel.commentsURL
+        commentsViewController.viewModelGenerator = viewModelGenerator
         self.navigationController?.pushViewController(commentsViewController, animated: true)
     }
 }
