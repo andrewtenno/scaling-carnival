@@ -13,6 +13,7 @@
 		39F2C8FF2060B86E00B1B10D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 39F2C8FD2060B86E00B1B10D /* LaunchScreen.storyboard */; };
 		39F2C90A2060B86E00B1B10D /* ThriveMarket_TestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F2C9092060B86E00B1B10D /* ThriveMarket_TestTests.swift */; };
 		39F2C9152060B86E00B1B10D /* ThriveMarket_TestUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F2C9142060B86E00B1B10D /* ThriveMarket_TestUITests.swift */; };
+		39F2C9242060BD5900B1B10D /* Mock.json in Resources */ = {isa = PBXBuildFile; fileRef = 39F2C9232060BD5900B1B10D /* Mock.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -45,6 +46,7 @@
 		39F2C9102060B86E00B1B10D /* ThriveMarket-TestUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "ThriveMarket-TestUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		39F2C9142060B86E00B1B10D /* ThriveMarket_TestUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThriveMarket_TestUITests.swift; sourceTree = "<group>"; };
 		39F2C9162060B86E00B1B10D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		39F2C9232060BD5900B1B10D /* Mock.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Mock.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,6 +102,7 @@
 				39F2C8FB2060B86E00B1B10D /* Assets.xcassets */,
 				39F2C8FD2060B86E00B1B10D /* LaunchScreen.storyboard */,
 				39F2C9002060B86E00B1B10D /* Info.plist */,
+				39F2C9232060BD5900B1B10D /* Mock.json */,
 			);
 			path = "ThriveMarket-Test";
 			sourceTree = "<group>";
@@ -237,6 +240,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				39F2C9242060BD5900B1B10D /* Mock.json in Resources */,
 				39F2C8FF2060B86E00B1B10D /* LaunchScreen.storyboard in Resources */,
 				39F2C8FC2060B86E00B1B10D /* Assets.xcassets in Resources */,
 			);
