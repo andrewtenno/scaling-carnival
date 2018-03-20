@@ -55,12 +55,18 @@ func createViewModels(fromListing listing: Listing) -> ([PostViewModel], String)
 func createThumbnail(fromPost post: Post) -> Thumbnail {
     guard let url = post.thumbnail else { return .unknown }
 
+    if (url.scheme == "http" || url.scheme == "https") {
+        return .image(url)
+    }
+
     switch url.absoluteString {
     case "self":
         return .self
     case "nsfw":
         return .nsfw
+    case "default":
+        return .default
     default:
-        return .image(url)
+        return .unknown
     }
 }

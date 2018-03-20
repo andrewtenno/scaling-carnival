@@ -44,50 +44,55 @@ class ResultsTableViewCell: UITableViewCell {
             guard let viewModel = viewModel else { return }
 
             titleLabel.text = viewModel.title
-//            switch viewModel.thumbnail {
-//            case .self:
-//                imageView?.backgroundColor = .red
-//            case .nsfw:
-//                imageView?.backgroundColor = .black
-//            case .image(let url):
-//                imageView?.hnk_setImage(from: url)
-//            case .unknown:
-//                imageView?.backgroundColor = .blue
-//            }
+            switch viewModel.thumbnail {
+            case .self:
+                thumbnailImageView.backgroundColor = .red
+            case .nsfw:
+                thumbnailImageView.backgroundColor = .black
+            case .image(let url):
+                print(url)
+                thumbnailImageView.hnk_setImage(from: url)
+            case .default:
+                thumbnailImageView.backgroundColor = .orange
+            case .unknown:
+                thumbnailImageView.backgroundColor = .blue
+            }
         }
     }
 
     override func prepareForReuse() {
         titleLabel.text = nil
         thumbnailImageView.hnk_cancelSetImage()
+        thumbnailImageView.image = nil
         thumbnailImageView.backgroundColor = nil
     }
 }
 
 private extension ResultsTableViewCell {
     func setupImageViewConstraints() {
-//        contentView.addSubview(thumbnailImageView)
-//        thumbnailImageView.translatesAutoresizingMaskIntoConstraints = false
-//        NSLayoutConstraint.activate([
-//            thumbnailImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: kPaddingConstant),
-//            thumbnailImageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: kPaddingConstant),
-//            thumbnailImageView.widthAnchor.constraint(equalToConstant: kImageViewSideLength),
-//            thumbnailImageView.heightAnchor.constraint(equalToConstant: kImageViewSideLength),
-//        ])
+        contentView.addSubview(thumbnailImageView)
+        thumbnailImageView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            thumbnailImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: kPaddingConstant),
+            thumbnailImageView.widthAnchor.constraint(equalToConstant: kImageViewSideLength),
+            thumbnailImageView.heightAnchor.constraint(equalToConstant: kImageViewSideLength)
+        ])
     }
 
     func setupTitleLabelConstraints() {
         contentView.addSubview(titleLabel)
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         titleLabel.setContentHuggingPriority(.defaultLow, for: .vertical)
-        titleLabel.setContentCompressionResistancePriority(.defaultHigh, for: .vertical)
+        titleLabel.setContentCompressionResistancePriority(.required, for: .vertical)
+        let heightConstraint = titleLabel.heightAnchor.constraint(greaterThanOrEqualToConstant: kImageViewSideLength)
+        heightConstraint.priority = .init(999)
         NSLayoutConstraint.activate([
-//            titleLabel.leadingAnchor.constraint(equalTo: thumbnailImageView.trailingAnchor, constant: kPaddingConstant),
-            titleLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: kPaddingConstant),
+            titleLabel.leadingAnchor.constraint(equalTo: thumbnailImageView.trailingAnchor, constant: kPaddingConstant),
             titleLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -kPaddingConstant),
             titleLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: kPaddingConstant),
             titleLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -kPaddingConstant),
-//            titleLabel.heightAnchor.constraint(greaterThanOrEqualTo: thumbnailImageView.heightAnchor)
+            titleLabel.centerYAnchor.constraint(equalTo: thumbnailImageView.centerYAnchor),
+            heightConstraint
         ])
     }
 }
@@ -95,7 +100,7 @@ private extension ResultsTableViewCell {
 private var imageCacheConfiguration: HNKCacheFormat = {
     let format = HNKCacheFormat(name: "com.thrivemarket-test.cache")!
     format.size = CGSize(width: kImageViewSideLength, height: kImageViewSideLength)
-    format.scaleMode = .aspectFill;
+    format.scaleMode = .aspectFit;
     format.compressionQuality = 0.5;
     format.diskCapacity = 2 * 1024 * 1024; // 2MB
     format.preloadPolicy = .lastSession;

@@ -13,6 +13,7 @@ enum Thumbnail {
     case nsfw
     case `self`
     case unknown
+    case `default`
 }
 
 struct PostViewModel {

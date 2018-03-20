@@ -24,6 +24,7 @@ class ResultsTableViewController: UITableViewController {
 
     override func viewDidLoad() {
         tableView.estimatedRowHeight = kEstimatedCellHeight
+        tableView.rowHeight = UITableViewAutomaticDimension
         tableView.register(ResultsTableViewCell.self, forCellReuseIdentifier: reuseIdentifier)
     }
 
