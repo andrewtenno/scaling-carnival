@@ -50,7 +50,6 @@ class ResultsTableViewCell: UITableViewCell {
             case .nsfw:
                 thumbnailImageView.backgroundColor = .black
             case .image(let url):
-                print(url)
                 thumbnailImageView.hnk_setImage(from: url)
             case .default:
                 thumbnailImageView.backgroundColor = .orange
