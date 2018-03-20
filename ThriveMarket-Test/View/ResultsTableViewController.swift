@@ -35,12 +35,12 @@ class ResultsTableViewController: UITableViewController {
 
 private extension ResultsTableViewController {
     func fetchViewModels() {
-        viewModelGenerator?.fetchListingViewModels(afterPage: nextPageToFetch, completion: { [weak self] (result) in
+        viewModelGenerator?.fetchPostViewModels(afterPage: nextPageToFetch, completion: { [weak self] (result) in
             self?.handleViewModalGenerationResult(result)
         })
     }
 
-    private func handleViewModalGenerationResult(_ result: ListingViewModelGenerationResult) {
+    private func handleViewModalGenerationResult(_ result: ListingViewModelGenerationResult<PostViewModel>) {
         switch result {
         case .success(let viewModels, let nextPageToFetch):
             OperationQueue.main.addOperation {

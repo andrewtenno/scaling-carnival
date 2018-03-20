@@ -8,13 +8,14 @@
 
 import Foundation
 
-enum ResultsFetchResult {
-    case success(Listing)
+enum ListingFetchResult<T> where T: Decodable {
+    case success(Listing<T>)
     case failure(Error)
 }
 
 protocol ResultsFetchable {
-    func fetchListings(afterPage page: String?, completion: @escaping (ResultsFetchResult) -> Void)
+    func fetchListings(afterPage page: String?, completion: @escaping (ListingFetchResult<Post>) -> Void)
+    func fetchComments(forURL url: URL, afterPage page: String?, completion: @escaping (ListingFetchResult<Comment>) -> Void)
 }
 
 class ResultsFetcher {
@@ -33,13 +34,26 @@ class ResultsFetcher {
 }
 
 extension ResultsFetcher: ResultsFetchable {
-    func fetchListings(afterPage page: String?, completion: @escaping (ResultsFetchResult) -> Void) {
+    func fetchListings(afterPage page: String?, completion: @escaping (ListingFetchResult<Post>) -> Void) {
         do {
             let urlRequest = try createFetchListingsURLRequest(afterPage: page)
             dataFetcher.fetchData(forRequest: urlRequest, completion: { [weak self] (result) in
                 guard let sSelf = self else { return }
 
-                sSelf.handleDataFetch(result:result, completion: completion)
+                sSelf.handlePostListingDataFetch(result:result, completion: completion)
+            })
+        } catch {
+            completion(.failure(error))
+        }
+    }
+
+    func fetchComments(forURL url: URL, afterPage page: String?, completion: @escaping (ListingFetchResult<Comment>) -> Void) {
+        do {
+            let urlRequest = try createFetchCommentsURLRequest(forURL: url, afterPage: page)
+            dataFetcher.fetchData(forRequest: urlRequest, completion: { [weak self] (result) in
+                guard let sSelf = self else { return }
+
+                sSelf.handleCommentsListingDataFetch(result:result, completion: completion)
             })
         } catch {
             completion(.failure(error))
@@ -70,12 +84,48 @@ private extension ResultsFetcher {
         return URLRequest(url: url)
     }
 
-    func handleDataFetch(result: DataFetchResult, completion: (ResultsFetchResult) -> Void) {
+    func handlePostListingDataFetch(result: DataFetchResult, completion: (ListingFetchResult<Post>) -> Void) {
         switch result {
         case .success(let data):
             do {
-                let page = try jsonDecoder.decode(Listing.self, from: data)
+                let page = try jsonDecoder.decode(Listing<Post>.self, from: data)
                 completion(.success(page))
+            } catch {
+                completion(.failure(error))
+            }
+        case .failure(let error):
+            completion(.failure(error))
+        }
+    }
+}
+
+private extension ResultsFetcher {
+    func createFetchCommentsURLRequest(forURL url: URL, afterPage page: String?) throws -> URLRequest {
+        guard var urlComponents = URLComponents(url: url, resolvingAgainstBaseURL: true) else {
+            throw ResultsFetchError.unableToCreateURLRequest
+        }
+
+        if let page = page {
+            let queryItemsToAdd = [ URLQueryItem(name: "after", value: page) ]
+            if let queryItems = urlComponents.queryItems {
+                urlComponents.queryItems = queryItems + queryItemsToAdd
+            } else {
+                urlComponents.queryItems = queryItemsToAdd
+            }
+        }
+
+        guard let url = urlComponents.url else {
+            throw ResultsFetchError.unableToCreateURLRequest
+        }
+        return URLRequest(url: url)
+    }
+
+    func handleCommentsListingDataFetch(result: DataFetchResult, completion: (ListingFetchResult<Comment>) -> Void) {
+        switch result {
+        case .success(let data):
+            do {
+                let comment = try jsonDecoder.decode(Listing<Comment>.self, from: data)
+                completion(.success(comment))
             } catch {
                 completion(.failure(error))
             }

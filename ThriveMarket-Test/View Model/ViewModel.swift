@@ -21,3 +21,8 @@ struct PostViewModel {
     let thumbnail: Thumbnail
     let commentsURL: URL
 }
+
+struct CommentViewModel {
+    let user: String
+    let text: String
+}

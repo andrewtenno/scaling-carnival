@@ -35,7 +35,7 @@ class CommentsTableViewController: UITableViewController {
 
 //private extension CommentsTableViewController {
 //    func fetchViewModels() {
-//        viewModelGenerator?.fetchListingViewModels(afterPage: nextPageToFetch, completion: { [weak self] (result) in
+//        viewModelGenerator?.fetchPostViewModels(afterPage: nextPageToFetch, completion: { [weak self] (result) in
 //            self?.handleViewModalGenerationResult(result)
 //        })
 //    }

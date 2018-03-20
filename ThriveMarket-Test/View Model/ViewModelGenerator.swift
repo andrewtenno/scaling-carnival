@@ -8,19 +8,15 @@
 
 import Foundation
 
-enum ListingViewModelGenerationResult {
-    case success([PostViewModel], String)
+enum ListingViewModelGenerationResult<T> {
+    case success([T], String)
     case failure(Error)
 }
 
 protocol ListingViewModelGeneratable {
-    func fetchListingViewModels(afterPage page: String?, completion: @escaping (ListingViewModelGenerationResult) -> Void)
+    func fetchPostViewModels(afterPage page: String?, completion: @escaping (ListingViewModelGenerationResult<PostViewModel>) -> Void)
+    func fetchCommentViewModels(forURL url: URL, afterPage page: String?, completion: @escaping (ListingViewModelGenerationResult<CommentViewModel>) -> Void)
 }
-
-protocol CommentsViewModelGeneratable {
-    func fetchCommentViewModels(afterPage page: String?, completion: @escaping (ListingViewModelGenerationResult) -> Void)
-}
-
 
 class ViewModelGenerator {
     let resultsFetcher: ResultsFetchable
@@ -31,28 +27,34 @@ class ViewModelGenerator {
 }
 
 extension ViewModelGenerator: ListingViewModelGeneratable {
-    func fetchListingViewModels(afterPage page: String?, completion: @escaping (ListingViewModelGenerationResult) -> Void) {
+    func fetchPostViewModels(afterPage page: String?, completion: @escaping (ListingViewModelGenerationResult<PostViewModel>) -> Void) {
         resultsFetcher.fetchListings(afterPage: page) { (result) in
-            handleFetchListings(result: result, completion: completion)
+            handleFetchPosts(result: result, completion: completion)
+        }
+    }
+
+    func fetchCommentViewModels(forURL url: URL, afterPage page: String?, completion: @escaping (ListingViewModelGenerationResult<CommentViewModel>) -> Void) {
+        resultsFetcher.fetchComments(forURL: url, afterPage: page) { (result) in
+            handleFetchComments(result: result, completion: completion)
         }
     }
 }
 
 // MARK: Helpers
 
-private func handleFetchListings(result: ResultsFetchResult, completion: (ListingViewModelGenerationResult) -> Void) {
+private func handleFetchPosts(result: ListingFetchResult<Post>, completion: (ListingViewModelGenerationResult<PostViewModel>) -> Void) {
     switch result {
     case .success(let listing):
-        let (viewModels, nextPageToFetch) = createViewModels(fromListing: listing)
+        let (viewModels, nextPageToFetch) = createPostViewModels(fromListing: listing)
         completion(.success(viewModels, nextPageToFetch))
     case .failure(let error):
         completion(.failure(error))
     }
 }
 
-func createViewModels(fromListing listing: Listing) -> ([PostViewModel], String) {
+private func createPostViewModels(fromListing listing: Listing<Post>) -> ([PostViewModel], String) {
     return (listing.page.children.map({ (child) -> PostViewModel in
-        let post = child.post
+        let post = child.data
 
         return PostViewModel(title: post.title,
                              thumbnail: createThumbnail(fromPost: post),
@@ -60,7 +62,7 @@ func createViewModels(fromListing listing: Listing) -> ([PostViewModel], String)
     }), listing.page.after)
 }
 
-func createThumbnail(fromPost post: Post) -> Thumbnail {
+private func createThumbnail(fromPost post: Post) -> Thumbnail {
     guard let url = post.thumbnail else { return .unknown }
 
     if (url.scheme == "http" || url.scheme == "https") {
@@ -79,6 +81,25 @@ func createThumbnail(fromPost post: Post) -> Thumbnail {
     }
 }
 
-func createCommentsURL(fromPost post: Post) -> URL {
+private func createCommentsURL(fromPost post: Post) -> URL {
     return URL(string: "http://reddit.com/r/\(post.subreddit)/comments/\(post.id)/.json")!
+}
+
+private func handleFetchComments(result: ListingFetchResult<Comment>, completion: (ListingViewModelGenerationResult<CommentViewModel>) -> Void) {
+    switch result {
+    case .success(let listing):
+        let (viewModels, nextPageToFetch) = createCommentViewModels(fromListing: listing)
+        completion(.success(viewModels, nextPageToFetch))
+    case .failure(let error):
+        completion(.failure(error))
+    }
+}
+
+private func createCommentViewModels(fromListing listing: Listing<Comment>) -> ([CommentViewModel], String) {
+    return (listing.page.children.map({ (child) -> CommentViewModel in
+        let comment = child.data
+
+        return CommentViewModel(user: comment.author,
+                                text: comment.body)
+    }), listing.page.after)
 }

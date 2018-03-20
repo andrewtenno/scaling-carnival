@@ -8,26 +8,23 @@
 
 import Foundation
 
-struct Listing: Decodable {
-    let page: Page
+struct Listing<T>: Decodable where T: Decodable {
+    let page: Page<T>
 
     enum CodingKeys: String, CodingKey {
         case page = "data"
     }
 }
 
-struct Page: Decodable {
+struct Page<T>: Decodable where T: Decodable {
     let before: String?
     let after: String
-    let children: [Child]
+    let children: [Child<T>]
 }
 
-struct Child: Decodable {
-    let post: Post
+struct Child<T>: Decodable where T: Decodable {
+    let data: T
 
-    enum CodingKeys: String, CodingKey {
-        case post = "data"
-    }
 }
 
 struct Post: Decodable {
@@ -35,4 +32,9 @@ struct Post: Decodable {
     let title: String
     let thumbnail: URL?
     let subreddit: String
+}
+
+struct Comment: Decodable {
+    let body: String
+    let author: String
 }
