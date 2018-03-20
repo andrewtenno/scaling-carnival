@@ -8,14 +8,19 @@
 
 import Foundation
 
-enum ViewModelGenerationResult {
+enum ListingViewModelGenerationResult {
     case success([PostViewModel], String)
     case failure(Error)
 }
 
-protocol ViewModelGeneratable {
-    func fetchViewModels(afterPage page: String?, completion: @escaping (ViewModelGenerationResult) -> Void)
+protocol ListingViewModelGeneratable {
+    func fetchListingViewModels(afterPage page: String?, completion: @escaping (ListingViewModelGenerationResult) -> Void)
 }
+
+protocol CommentsViewModelGeneratable {
+    func fetchCommentViewModels(afterPage page: String?, completion: @escaping (ListingViewModelGenerationResult) -> Void)
+}
+
 
 class ViewModelGenerator {
     let resultsFetcher: ResultsFetchable
@@ -25,15 +30,17 @@ class ViewModelGenerator {
     }
 }
 
-extension ViewModelGenerator: ViewModelGeneratable {
-    func fetchViewModels(afterPage page: String?, completion: @escaping (ViewModelGenerationResult) -> Void) {
+extension ViewModelGenerator: ListingViewModelGeneratable {
+    func fetchListingViewModels(afterPage page: String?, completion: @escaping (ListingViewModelGenerationResult) -> Void) {
         resultsFetcher.fetchListings(afterPage: page) { (result) in
             handleFetchListings(result: result, completion: completion)
         }
     }
 }
 
-private func handleFetchListings(result: ResultsFetchResult, completion: (ViewModelGenerationResult) -> Void) {
+// MARK: Helpers
+
+private func handleFetchListings(result: ResultsFetchResult, completion: (ListingViewModelGenerationResult) -> Void) {
     switch result {
     case .success(let listing):
         let (viewModels, nextPageToFetch) = createViewModels(fromListing: listing)
@@ -48,7 +55,8 @@ func createViewModels(fromListing listing: Listing) -> ([PostViewModel], String)
         let post = child.post
 
         return PostViewModel(title: post.title,
-                             thumbnail: createThumbnail(fromPost: post))
+                             thumbnail: createThumbnail(fromPost: post),
+                             commentsURL: createCommentsURL(fromPost: post))
     }), listing.page.after)
 }
 
@@ -69,4 +77,8 @@ func createThumbnail(fromPost post: Post) -> Thumbnail {
     default:
         return .unknown
     }
+}
+
+func createCommentsURL(fromPost post: Post) -> URL {
+    return URL(string: "http://reddit.com/r/\(post.subreddit)/comments/\(post.id)/.json")!
 }

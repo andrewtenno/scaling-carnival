@@ -19,4 +19,5 @@ enum Thumbnail {
 struct PostViewModel {
     let title: String
     let thumbnail: Thumbnail
+    let commentsURL: URL
 }

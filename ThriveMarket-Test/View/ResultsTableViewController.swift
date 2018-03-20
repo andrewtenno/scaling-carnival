@@ -11,10 +11,10 @@ import UIKit
 private let kEstimatedCellHeight: CGFloat = 56.0
 
 class ResultsTableViewController: UITableViewController {
-    var viewModelGenerator: ViewModelGeneratable?
+    var viewModelGenerator: ListingViewModelGeneratable?
     var viewModels: [PostViewModel] = []
-    var nextPageToFetch: String?
-    var isLoadingNextPage = true
+    private var nextPageToFetch: String?
+    private var isLoadingNextPage = true
 
     private let reuseIdentifier = "reuseIdentifier"
 
@@ -35,12 +35,12 @@ class ResultsTableViewController: UITableViewController {
 
 private extension ResultsTableViewController {
     func fetchViewModels() {
-        viewModelGenerator?.fetchViewModels(afterPage: nextPageToFetch, completion: { [weak self] (result) in
+        viewModelGenerator?.fetchListingViewModels(afterPage: nextPageToFetch, completion: { [weak self] (result) in
             self?.handleViewModalGenerationResult(result)
         })
     }
 
-    private func handleViewModalGenerationResult(_ result: ViewModelGenerationResult) {
+    private func handleViewModalGenerationResult(_ result: ListingViewModelGenerationResult) {
         switch result {
         case .success(let viewModels, let nextPageToFetch):
             OperationQueue.main.addOperation {
@@ -89,6 +89,13 @@ extension ResultsTableViewController {
 extension ResultsTableViewController {
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return UITableViewAutomaticDimension
+    }
+
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let viewModel = viewModels[indexPath.row]
+        let url = viewModel.commentsURL
+        let commentsViewController = CommentsTableViewController()
+        self.navigationController?.pushViewController(commentsViewController, animated: true)
     }
 }
 

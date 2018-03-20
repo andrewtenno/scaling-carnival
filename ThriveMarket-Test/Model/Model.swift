@@ -34,4 +34,5 @@ struct Post: Decodable {
     let id: String
     let title: String
     let thumbnail: URL?
+    let subreddit: String
 }
