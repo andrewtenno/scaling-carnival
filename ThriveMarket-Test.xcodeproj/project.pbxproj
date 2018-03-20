@@ -20,6 +20,7 @@
 		39F2C9302060CFA000B1B10D /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F2C92F2060CFA000B1B10D /* ViewModel.swift */; };
 		39F2C9322060CFB100B1B10D /* ViewModelGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F2C9312060CFB100B1B10D /* ViewModelGenerator.swift */; };
 		39F2C9342060D59900B1B10D /* ResultsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F2C9332060D59900B1B10D /* ResultsTableViewCell.swift */; };
+		C18512BB76C6BC3CBA258958 /* Pods_ThriveMarket_Test.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D75A67EF603DAEA3A7591DC /* Pods_ThriveMarket_Test.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,6 +41,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2992E39BA9839507EBF3B0F9 /* Pods-ThriveMarket-Test.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ThriveMarket-Test.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ThriveMarket-Test/Pods-ThriveMarket-Test.debug.xcconfig"; sourceTree = "<group>"; };
+		2D3A3BA680BCEE34FE9CABAD /* Pods-ThriveMarket-Test.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ThriveMarket-Test.release.xcconfig"; path = "Pods/Target Support Files/Pods-ThriveMarket-Test/Pods-ThriveMarket-Test.release.xcconfig"; sourceTree = "<group>"; };
 		39F2C8F12060B86E00B1B10D /* ThriveMarket-Test.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ThriveMarket-Test.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		39F2C8F42060B86E00B1B10D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		39F2C8F62060B86E00B1B10D /* ResultsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultsTableViewController.swift; sourceTree = "<group>"; };
@@ -59,6 +62,7 @@
 		39F2C92F2060CFA000B1B10D /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 		39F2C9312060CFB100B1B10D /* ViewModelGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelGenerator.swift; sourceTree = "<group>"; };
 		39F2C9332060D59900B1B10D /* ResultsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultsTableViewCell.swift; sourceTree = "<group>"; };
+		3D75A67EF603DAEA3A7591DC /* Pods_ThriveMarket_Test.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ThriveMarket_Test.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,6 +70,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C18512BB76C6BC3CBA258958 /* Pods_ThriveMarket_Test.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -86,6 +91,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2A884D51397CF1674741D603 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				2992E39BA9839507EBF3B0F9 /* Pods-ThriveMarket-Test.debug.xcconfig */,
+				2D3A3BA680BCEE34FE9CABAD /* Pods-ThriveMarket-Test.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		39F2C8E82060B86E00B1B10D = {
 			isa = PBXGroup;
 			children = (
@@ -93,6 +107,8 @@
 				39F2C9082060B86E00B1B10D /* ThriveMarket-TestTests */,
 				39F2C9132060B86E00B1B10D /* ThriveMarket-TestUITests */,
 				39F2C8F22060B86E00B1B10D /* Products */,
+				2A884D51397CF1674741D603 /* Pods */,
+				62B83D54F3491BBB10D503E7 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -167,6 +183,14 @@
 			path = "View Model";
 			sourceTree = "<group>";
 		};
+		62B83D54F3491BBB10D503E7 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				3D75A67EF603DAEA3A7591DC /* Pods_ThriveMarket_Test.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -174,9 +198,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 39F2C9192060B86E00B1B10D /* Build configuration list for PBXNativeTarget "ThriveMarket-Test" */;
 			buildPhases = (
+				B76EEFE780838DFC100CD8A1 /* [CP] Check Pods Manifest.lock */,
 				39F2C8ED2060B86E00B1B10D /* Sources */,
 				39F2C8EE2060B86E00B1B10D /* Frameworks */,
 				39F2C8EF2060B86E00B1B10D /* Resources */,
+				B468F04D766856931155C3A2 /* [CP] Embed Pods Frameworks */,
+				7EC41CF562677D501AF3CD62 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -295,6 +322,60 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		7EC41CF562677D501AF3CD62 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ThriveMarket-Test/Pods-ThriveMarket-Test-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B468F04D766856931155C3A2 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-ThriveMarket-Test/Pods-ThriveMarket-Test-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Haneke/Haneke.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Haneke.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ThriveMarket-Test/Pods-ThriveMarket-Test-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B76EEFE780838DFC100CD8A1 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-ThriveMarket-Test-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		39F2C8ED2060B86E00B1B10D /* Sources */ = {
@@ -464,6 +545,7 @@
 		};
 		39F2C91A2060B86E00B1B10D /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2992E39BA9839507EBF3B0F9 /* Pods-ThriveMarket-Test.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -479,6 +561,7 @@
 		};
 		39F2C91B2060B86E00B1B10D /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2D3A3BA680BCEE34FE9CABAD /* Pods-ThriveMarket-Test.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;

@@ -46,7 +46,21 @@ private func handleFetchListings(result: ResultsFetchResult, completion: (ViewMo
 func createViewModels(fromListing listing: Listing) -> ([PostViewModel], String) {
     return (listing.page.children.map({ (child) -> PostViewModel in
         let post = child.post
+
         return PostViewModel(title: post.title,
-                             thumbnail: post.thumbnail)
+                             thumbnail: createThumbnail(fromPost: post))
     }), listing.page.after)
+}
+
+func createThumbnail(fromPost post: Post) -> Thumbnail {
+    guard let url = post.thumbnail else { return .unknown }
+
+    switch url.absoluteString {
+    case "self":
+        return .self
+    case "nsfw":
+        return .nsfw
+    default:
+        return .image(url)
+    }
 }

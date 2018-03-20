@@ -8,7 +8,14 @@
 
 import Foundation
 
+enum Thumbnail {
+    case image(URL)
+    case nsfw
+    case `self`
+    case unknown
+}
+
 struct PostViewModel {
     let title: String
-    let thumbnail: URL?
+    let thumbnail: Thumbnail
 }
