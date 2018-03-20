@@ -9,7 +9,7 @@
 import Foundation
 
 enum ResultsFetchResult {
-    case success(Page)
+    case success(Listing)
     case failure(Error)
 }
 
@@ -49,7 +49,7 @@ extension ResultsFetcher: ResultsFetchable {
 
 // MARK: Helpers
 
-extension ResultsFetcher {
+private extension ResultsFetcher {
     func createFetchListingsURLRequest(afterPage page: String?) throws -> URLRequest {
         guard var urlComponents = URLComponents(url: endpoint, resolvingAgainstBaseURL: true) else {
             throw ResultsFetchError.unableToCreateURLRequest
@@ -74,7 +74,7 @@ extension ResultsFetcher {
         switch result {
         case .success(let data):
             do {
-                let page = try jsonDecoder.decode(Page.self, from: data)
+                let page = try jsonDecoder.decode(Listing.self, from: data)
                 completion(.success(page))
             } catch {
                 completion(.failure(error))
