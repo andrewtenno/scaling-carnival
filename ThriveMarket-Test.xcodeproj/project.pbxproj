@@ -19,6 +19,7 @@
 		39F2C92D2060C81400B1B10D /* ResultsFetcherTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F2C92C2060C81400B1B10D /* ResultsFetcherTests.swift */; };
 		39F2C9302060CFA000B1B10D /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F2C92F2060CFA000B1B10D /* ViewModel.swift */; };
 		39F2C9322060CFB100B1B10D /* ViewModelGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F2C9312060CFB100B1B10D /* ViewModelGenerator.swift */; };
+		39F2C9342060D59900B1B10D /* ResultsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F2C9332060D59900B1B10D /* ResultsTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,6 +58,7 @@
 		39F2C92C2060C81400B1B10D /* ResultsFetcherTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultsFetcherTests.swift; sourceTree = "<group>"; };
 		39F2C92F2060CFA000B1B10D /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 		39F2C9312060CFB100B1B10D /* ViewModelGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelGenerator.swift; sourceTree = "<group>"; };
+		39F2C9332060D59900B1B10D /* ResultsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultsTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -141,6 +143,7 @@
 			isa = PBXGroup;
 			children = (
 				39F2C8F62060B86E00B1B10D /* ResultsTableViewController.swift */,
+				39F2C9332060D59900B1B10D /* ResultsTableViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -300,6 +303,7 @@
 			files = (
 				39F2C9322060CFB100B1B10D /* ViewModelGenerator.swift in Sources */,
 				39F2C9272060BE0700B1B10D /* DataFetcher.swift in Sources */,
+				39F2C9342060D59900B1B10D /* ResultsTableViewCell.swift in Sources */,
 				39F2C8F72060B86E00B1B10D /* ResultsTableViewController.swift in Sources */,
 				39F2C92B2060BE8D00B1B10D /* ResultsFetcher.swift in Sources */,
 				39F2C8F52060B86E00B1B10D /* AppDelegate.swift in Sources */,

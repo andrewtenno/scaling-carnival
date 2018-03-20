@@ -28,9 +28,18 @@ private func createWindow() -> UIWindow {
     let screenFrame = UIScreen.main.fixedCoordinateSpace.bounds
     let window = UIWindow(frame: screenFrame)
     let resultsViewController = ResultsTableViewController()
+    resultsViewController.viewModelGenerator = createViewModelGenerator()
     let navigationController = UINavigationController(rootViewController: resultsViewController)
     window.rootViewController = navigationController
 
     return window
 }
 
+private func createViewModelGenerator() -> ViewModelGeneratable {
+    let dataFetcher = RemoteDataFetcher(urlSession: .shared)
+    let url = URL(string: "http://www.reddit.com/r/all/new.json")!
+    let resultsFetcher = ResultsFetcher(endpoint: url, dataFetcher: dataFetcher)
+    let viewModelGenerator = ViewModelGenerator(resultsFetcher: resultsFetcher)
+
+    return viewModelGenerator
+}
